@@ -2,6 +2,11 @@ body{
     background-color: #E3E7E8;
     font-family: system-ui;
 }
+h1{
+
+    text-align: center;
+    
+    }
 .container{
     width: 1000px;
     margin: auto;
