@@ -107,3 +107,24 @@ function changeQuantity(key, quantity){
     }
     reloadCard();
 }
+
+document.getElementById("saveBtn").addEventListener("click", function() {
+    // get form data
+    var form = document.getElementById("myForm");
+    var formData = new FormData(form);
+  
+    // send data to Flask backend
+    fetch('/save', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+      console.log(data);
+      alert(data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  });
+  
