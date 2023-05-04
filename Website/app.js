@@ -108,12 +108,12 @@ function changeQuantity(key, quantity){
     reloadCard();
 }
 
-document.getElementById("saveBtn").addEventListener("click", function() {
+document.querySelector('.confirm').addEventListener('click', () => {
     // get form data
     var form = document.getElementById("myForm");
     var formData = new FormData(form);
   
-    // send data to Flask backend
+    // send data to server
     fetch('/save', {
       method: 'POST',
       body: formData
@@ -127,4 +127,6 @@ document.getElementById("saveBtn").addEventListener("click", function() {
       console.error('Error:', error);
     });
   });
+  
+
   
