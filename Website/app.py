@@ -1,19 +1,18 @@
 from flask import Flask, render_template, request, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 
-
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1234@localhost/db'
 db = SQLAlchemy(app)
 
 class SelectedData(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    data1 = db.Column(db.String(50))
-    data2 = db.Column(db.String(50))
-    data3 = db.Column(db.String(50))
-    data4 = db.Column(db.String(50))
-    data5 = db.Column(db.String(50))
-    data6 = db.Column(db.String(50))
+    id1 = db.Column(db.Integer, default=0)
+    id2 = db.Column(db.Integer, default=0)
+    id3 = db.Column(db.Integer, default=0)
+    id4 = db.Column(db.Integer, default=0)
+    id5 = db.Column(db.Integer, default=0)
+    id6 = db.Column(db.Integer, default=0)
 
 @app.route('/')
 def index():
@@ -21,16 +20,13 @@ def index():
 
 @app.route('/save', methods=['POST'])
 def save():
-    data1 = request.form['data1']
-    data2 = request.form['data2']
-    data3 = request.form['data3']
-    data4 = request.form['data4']
-    data5 = request.form['data5']
-    data6 = request.form['data6']
-    selected_data = SelectedData(data1=data1, data2=data2, data3=data3, data4=data4, data5=data5, data6=data6)
+    data = {}
+    for i in range(1, 7):
+        data[f'id{i}'] = request.form[f'data{i}']
+    selected_data = SelectedData(**data)
     db.session.add(selected_data)
     db.session.commit()
-    return 'Confirm successfully!'
+    return 'Confirmed successfully!'
 
 @app.route('/<path:path>')
 def serve_file(path):

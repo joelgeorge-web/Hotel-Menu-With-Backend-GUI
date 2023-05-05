@@ -109,14 +109,26 @@ function changeQuantity(key, quantity){
 }
 
 document.querySelector('.confirm').addEventListener('click', () => {
-    // get form data
-    var form = document.getElementById("myForm");
-    var formData = new FormData(form);
-  
-    // send data to server
+    // create an array of cart items
+    const cartItems = [];
+    listCards.forEach((item, index) => {
+      if (item) {
+        const cartItem = {
+          id: item.id,
+          quantity: item.quantity,
+          price: item.price,
+        };
+        cartItems.push(cartItem);
+      }
+    });
+    
+    // send cart data to server
     fetch('/save', {
       method: 'POST',
-      body: formData
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(cartItems)
     })
     .then(response => response.text())
     .then(data => {
@@ -127,6 +139,7 @@ document.querySelector('.confirm').addEventListener('click', () => {
       console.error('Error:', error);
     });
   });
+  
   
 
   
