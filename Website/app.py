@@ -53,7 +53,7 @@ def tab():
     app1.geometry(app_geometry)
     app1.configure(bg="white")
     app1.title("Tab")
-    
+
     # Create call any robot Button
     bot1 = tk.Button(master=app1, text="CALL ANY ROBOT", font=("Helvetica", 18), bg="white", fg="black")
     bot1.pack(pady=(50,50), padx=20)
@@ -102,9 +102,72 @@ def gui():
 
     def table1():
         mycursor = mydb.cursor()
-        mycursor.execute("SELECT * FROM selected_data WHERE id = 1")
-        result = mycursor.fetchall()
-        messagebox.showinfo("Table 1", result)
+        mycursor.execute("SELECT * FROM selected WHERE id = 12")
+        result = mycursor.fetchone()
+        
+        data2 = result[1]
+        data3 = result[2]
+        data4 = result[3]
+        data5 = result[4]
+        data6 = result[5]
+        data7 = result[6]
+        messagebox.showinfo("ORDER-1",f"CHICKEN AND EGG: {data2}\n CHICKEN TENDER: {data3}\n CHICKEN SALAD: {data4}\n PUMPKIN SOUP: {data5}\n SALAD: {data6}\n PIZZA: {data7}\n")
+        mycursor.close()
+
+    def table2():
+        mycursor = mydb.cursor()
+        mycursor.execute("SELECT * FROM selected WHERE id = 11")
+        result = mycursor.fetchone()
+        
+        data2 = result[1]
+        data3 = result[2]
+        data4 = result[3]
+        data5 = result[4]
+        data6 = result[5]
+        data7 = result[6]
+        messagebox.showinfo("ORDER-2",f"CHICKEN AND EGG: {data2}\n CHICKEN TENDER: {data3}\n CHICKEN SALAD: {data4}\n PUMPKIN SOUP: {data5}\n SALAD: {data6}\n PIZZA: {data7}\n")
+        mycursor.close()
+
+    def table3():
+        mycursor = mydb.cursor()
+        mycursor.execute("SELECT * FROM selected WHERE id = 10")
+        result = mycursor.fetchone()
+        
+        data2 = result[1]
+        data3 = result[2]
+        data4 = result[3]
+        data5 = result[4]
+        data6 = result[5]
+        data7 = result[6]
+        messagebox.showinfo("ORDER-3",f"CHICKEN AND EGG: {data2}\n CHICKEN TENDER: {data3}\n CHICKEN SALAD: {data4}\n PUMPKIN SOUP: {data5}\n SALAD: {data6}\n PIZZA: {data7}\n")
+        mycursor.close()
+
+    def table4():
+        mycursor = mydb.cursor()
+        mycursor.execute("SELECT * FROM selected WHERE id = 9")
+        result = mycursor.fetchone()
+        
+        data2 = result[1]
+        data3 = result[2]
+        data4 = result[3]
+        data5 = result[4]
+        data6 = result[5]
+        data7 = result[6]
+        messagebox.showinfo("ORDER-4",f"CHICKEN AND EGG: {data2}\n CHICKEN TENDER: {data3}\n CHICKEN SALAD: {data4}\n PUMPKIN SOUP: {data5}\n SALAD: {data6}\n PIZZA: {data7}\n")
+        mycursor.close()
+
+    def table5():
+        mycursor = mydb.cursor()
+        mycursor.execute("SELECT * FROM selected WHERE id = 8")
+        result = mycursor.fetchone()
+        
+        data2 = result[1]
+        data3 = result[2]
+        data4 = result[3]
+        data5 = result[4]
+        data6 = result[5]
+        data7 = result[6]
+        messagebox.showinfo("ORDER-5",f"CHICKEN AND EGG: {data2}\n CHICKEN TENDER: {data3}\n CHICKEN SALAD: {data4}\n PUMPKIN SOUP: {data5}\n SALAD: {data6}\n PIZZA: {data7}\n")
         mycursor.close()
 
     
@@ -121,9 +184,24 @@ def gui():
     # Create left panel with three buttons
     left_panel = tk.Frame(master=app2, width=200, bg="white")
     left_panel.pack(side="left", fill="both")
+    # Create left panel with three buttons
+    right_panel = tk.Frame(master=app2, width=200, bg="white")
+    right_panel.pack(side="right", fill="both")
     # Create a button for table 1
-    table_1_button = tk.Button(master=left_panel, text="Table-1", font=("Helvetica", 18),bg="white", fg="black", command=table1)
+    table_1_button = tk.Button(master=left_panel, text="TABLE-1", font=("Helvetica", 18),bg="white", fg="black", command=table1)
     table_1_button.pack(side="top", pady=20)
+
+    table_2_button = tk.Button(master=left_panel, text="TABLE-2", font=("Helvetica", 18),bg="white", fg="black", command=table2)
+    table_2_button.pack(side="top", pady=20)
+
+    table_3_button = tk.Button(master=left_panel, text="TABLE-3", font=("Helvetica", 18),bg="white", fg="black", command=table3)
+    table_3_button.pack(side="top", pady=20)
+
+    table_4_button = tk.Button(master=left_panel, text="TABLE-4", font=("Helvetica", 18),bg="white", fg="black", command=table4)
+    table_4_button.pack(side="top", pady=20)
+
+    table_5_button = tk.Button(master=left_panel, text="TABLE-5", font=("Helvetica", 18),bg="white", fg="black", command=table5)
+    table_5_button.pack(side="top", pady=20)
 
 
 #create an option for editing menu
@@ -181,11 +259,34 @@ def gui():
         sql_query = "UPDATE selected_data SET outofstock = %s, price = %s WHERE id = 6"
         food(sql_query, id)
 
+    def robot_popup():
+        print("  _____ ")
+        print(" /     \\")
+        print("| () () |")
+        print("|  |||  |")
+        print(" \\'_'_/ ")
+        print("  / | \\ ")
+        print(" |  |  |")
+        print(" |  |  |")
 
     menu = tk.Menu(app2, tearoff=0)
+
+    call_specific_robot = tk.Menubutton(master=right_panel, text="Call Specific Robot", font=("Helvetica", 18), bg="white", fg="black")
+    call_specific_robot.pack(side="top", pady=100, padx=100)
+
+    call_specific_robot.menu = tk.Menu(call_specific_robot, tearoff=0)
+    call_specific_robot.menu.add_cascade(label="ROBOT 1",font=("Helvetica", 20))
+    call_specific_robot.menu.add_cascade(label="ROBOT 2",font=("Helvetica", 20))
+    call_specific_robot.menu.add_cascade(label="ROBOT 3",font=("Helvetica", 20))
+    call_specific_robot.menu.add_cascade(label="ROBOT 4",font=("Helvetica", 20))
+    call_specific_robot.menu.add_cascade(label="ROBOT 5",font=("Helvetica", 20))
+
+    call_any_robot = tk.Button(master=right_panel, text="Call Any Robot", font=("Helvetica", 18),command = robot_popup,bg="white", fg="black")
+    call_any_robot.pack(side="top", pady=100, padx=100)
     
-    edit_button = tk.Menubutton(master=app2, text="EDIT MENU", font=("Helvetica", 18), bg="white", fg="black")
-    edit_button.pack(side="right", pady=20, padx=20)
+
+    edit_button = tk.Menubutton(master=right_panel, text="EDIT MENU", font=("Helvetica", 18), bg="white", fg="black")
+    edit_button.pack(side="right", pady=100, padx=100)
 
     edit_button.menu = tk.Menu(edit_button, tearoff=0)
     edit_button.menu.add_cascade(label="Food 1", command=f1,font=("Helvetica", 20))
@@ -195,7 +296,7 @@ def gui():
     edit_button.menu.add_cascade(label="Food 5", command=f5,font=("Helvetica", 20))
     edit_button.menu.add_cascade(label="Food 6", command=f6,font=("Helvetica", 20))
 
-    
+    call_specific_robot["menu"] = call_specific_robot.menu
     edit_button["menu"] = edit_button.menu
 
     app2.mainloop()
@@ -241,5 +342,5 @@ def open_browser():
     webbrowser.open_new('http://127.0.0.1:5000/')
 
 if __name__ == '__main__':
-    threading.Timer(1.25, open_browser).start()
+    # threading.Timer(1.25, open_browser).start()
     app.run()    
