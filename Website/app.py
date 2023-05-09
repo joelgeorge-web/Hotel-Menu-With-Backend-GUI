@@ -218,7 +218,6 @@ class Selected(db.Model):
     id5 = db.Column(db.Integer, default=0)
     id6 = db.Column(db.Integer, default=0)
 
-db.create_all()
 
 
 @app.route('/')

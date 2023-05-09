@@ -24,7 +24,7 @@
                     <img src="image/{{item.image}}">
                     <div class="title">{{item.name}}</div>
                     <div class="price">{{item.price}}</div>
-                    <button onclick="addToCard({{loop.index}})">Add To Cart</button>`;
+                    <button onclick="addToCard({{loop.index-1}})">Add To Cart</button>
                 </div>
             {% endfor %}
         </div>
