@@ -6,6 +6,7 @@ from tkinter import messagebox
 import threading
 import webbrowser
 import logging
+from tkinter import ttk
 
 #Connection to mysql database running on localhost
 
@@ -170,6 +171,67 @@ def gui():
         messagebox.showinfo("ORDER-5",f"CHICKEN AND EGG: {data2}\n CHICKEN TENDER: {data3}\n CHICKEN SALAD: {data4}\n PUMPKIN SOUP: {data5}\n SALAD: {data6}\n PIZZA: {data7}\n")
         mycursor.close()
 
+    def all_data():
+        # Create a new window
+        pop_up = tk.Toplevel()
+        pop_up.title("All Data")
+        
+        # Create a table to display the data
+        table = ttk.Treeview(pop_up)
+        table['columns'] = ('name', 'price', 'image')
+        table.column('#0', width=0, stretch=tk.NO)
+        table.column('name', anchor=tk.CENTER, width=100)
+        table.column('price', anchor=tk.CENTER, width=100)
+        table.column('image', anchor=tk.CENTER, width=100)
+        table.heading('name', text='Name')
+        table.heading('price', text='Price')
+        table.heading('image', text='Image')
+        
+        # Retrieve data from the database and insert it into the table
+        mycursor = mydb.cursor()
+        mycursor.execute("SELECT * FROM selected_data")
+        results = mycursor.fetchall()
+        for row in results:
+            table.insert('', tk.END, text=row[0], values=(row[1], row[2], row[3]))
+        
+        # Pack the table into the window
+        table.pack(padx=5, pady=5)
+
+
+
+    def all_orders():
+        # Create a new window
+        pop_up = tk.Toplevel()
+        pop_up.title("All Orders")
+        
+        # Create a table to display the data
+        table = ttk.Treeview(pop_up)
+        table['columns'] = ('ID', 'Item1', 'Item2', 'Item3', 'Item4', 'Item5', 'Item6')
+        table.column('#0', width=0, stretch=tk.NO)
+        table.column('ID', anchor=tk.CENTER, width=100)
+        table.column('Item1', anchor=tk.CENTER, width=100)
+        table.column('Item2', anchor=tk.CENTER, width=100)
+        table.column('Item3', anchor=tk.CENTER, width=100)
+        table.column('Item4', anchor=tk.CENTER, width=100)
+        table.column('Item5', anchor=tk.CENTER, width=100)
+        table.column('Item6', anchor=tk.CENTER, width=100)
+        table.heading('ID', text='ID')
+        table.heading('Item1', text='Item1')
+        table.heading('Item2', text='Item2')
+        table.heading('Item3', text='Item3')
+        table.heading('Item4', text='Item4')
+        table.heading('Item5', text='Item5')
+        table.heading('Item6', text='Item6')
+        
+        # Retrieve data from the database and insert it into the table
+        mycursor = mydb.cursor()
+        mycursor.execute("SELECT * FROM selected")
+        results = mycursor.fetchall()
+        for row in results:
+            table.insert('', tk.END, values=(row[0], row[1], row[2], row[3], row[4], row[5], row[6]))
+        
+        # Pack the table into the window
+        table.pack(padx=5, pady=5)
     
     app2 = tk.Tk()
     width= app2.winfo_screenwidth()               
@@ -202,6 +264,13 @@ def gui():
 
     table_5_button = tk.Button(master=left_panel, text="TABLE-5", font=("Helvetica", 18),bg="white", fg="black", command=table5)
     table_5_button.pack(side="top", pady=20)
+
+    all_data = tk.Button(master=left_panel, text="All Data", font=("Helvetica", 18),bg="white", fg="black", command=all_data)
+    all_data.pack(side="top", pady=20)
+
+    all_orders = tk.Button(master=left_panel, text="All Orders", font=("Helvetica", 18),bg="white", fg="black", command=all_orders)
+    all_orders.pack(side="top", pady=20)
+
 
 
 #create an option for editing menu
@@ -269,17 +338,32 @@ def gui():
         print(" |  |  |")
         print(" |  |  |")
 
+
+
+    def r1():
+        showMessage("Robot1 coming", type='info', timeout=500)
+    def r2():
+        showMessage("Robot2 coming", type='info', timeout=500)
+    def r3():
+        showMessage("Robot3 coming", type='info', timeout=500)
+    def r4():
+        showMessage("Robot4 coming", type='info', timeout=500)
+    def r5():
+        showMessage("Robot5 coming", type='info', timeout=500)
+
     menu = tk.Menu(app2, tearoff=0)
 
     call_specific_robot = tk.Menubutton(master=right_panel, text="Call Specific Robot", font=("Helvetica", 18), bg="white", fg="black")
-    call_specific_robot.pack(side="top", pady=100, padx=100)
+    call_specific_robot.pack(side="top", pady=100)
 
     call_specific_robot.menu = tk.Menu(call_specific_robot, tearoff=0)
-    call_specific_robot.menu.add_cascade(label="ROBOT 1",font=("Helvetica", 20))
-    call_specific_robot.menu.add_cascade(label="ROBOT 2",font=("Helvetica", 20))
-    call_specific_robot.menu.add_cascade(label="ROBOT 3",font=("Helvetica", 20))
-    call_specific_robot.menu.add_cascade(label="ROBOT 4",font=("Helvetica", 20))
-    call_specific_robot.menu.add_cascade(label="ROBOT 5",font=("Helvetica", 20))
+    call_specific_robot.menu.add_cascade(label="ROBOT 1",command=r1,font=("Helvetica", 20))
+    call_specific_robot.menu.add_cascade(label="ROBOT 2",command=r2,font=("Helvetica", 20))
+    call_specific_robot.menu.add_cascade(label="ROBOT 3",command=r3,font=("Helvetica", 20))
+    call_specific_robot.menu.add_cascade(label="ROBOT 4",command=r4,font=("Helvetica", 20))
+    call_specific_robot.menu.add_cascade(label="ROBOT 5",command=r5,font=("Helvetica", 20))
+
+            
 
     call_any_robot = tk.Button(master=right_panel, text="Call Any Robot", font=("Helvetica", 18),command = robot_popup,bg="white", fg="black")
     call_any_robot.pack(side="top", pady=100, padx=100)

@@ -121,7 +121,7 @@ document.querySelector('.confirm').addEventListener('click', () => {
     const cartItems = {};
     products.map((product,i)=>{
       listCards.forEach((item, index) => {
-        if (item.id === i) {
+        if (item.id === i+1) {
           cartItems[`id${i+1}`] = item.quantity
         }
       });
