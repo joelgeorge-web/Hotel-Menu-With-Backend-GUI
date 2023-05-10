@@ -6,6 +6,17 @@ mydb = mysql.connector.connect(
     password="1234",
     database="db"
     )
+
+def robot_popup():
+        print("  _____ ")
+        print(" /     \\")
+        print("| () () |")
+        print("|  |||  |")
+        print(" \\'_'_/ ")
+        print("  / | \\ ")
+        print(" |  |  |")
+        print(" |  |  |")
+
 def n1(id):
     mycursor = mydb.cursor()
     sql = "SELECT * FROM robot WHERE id = %s"

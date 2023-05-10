@@ -334,20 +334,6 @@ def gui():
         id == 6
         sql_query = "UPDATE selected_data SET outofstock = %s, price = %s WHERE id = 6"
         food(sql_query, id)
-
-    def robot_popup():
-        print("  _____ ")
-        print(" /     \\")
-        print("| () () |")
-        print("|  |||  |")
-        print(" \\'_'_/ ")
-        print("  / | \\ ")
-        print(" |  |  |")
-        print(" |  |  |")
-
-
-
-
     menu = tk.Menu(app2, tearoff=0)
 
     call_specific_robot = tk.Menubutton(master=right_panel, text="Call Specific Robot", font=("Helvetica", 18), bg="white", fg="black")
@@ -362,7 +348,7 @@ def gui():
 
             
 
-    call_any_robot = tk.Button(master=right_panel, text="Call Any Robot", font=("Helvetica", 18),command = robot_popup,bg="white", fg="black")
+    call_any_robot = tk.Button(master=right_panel, text="Call Any Robot", font=("Helvetica", 18),command = scripts.robot_popup,bg="white", fg="black")
     call_any_robot.pack(side="top", pady=100, padx=100)
     
 
