@@ -7,6 +7,8 @@ import threading
 import webbrowser
 import logging
 from tkinter import ttk
+import scripts
+
 
 #Connection to mysql database running on localhost
 
@@ -345,16 +347,6 @@ def gui():
 
 
 
-    def r1():
-        showMessage("Robot1 coming", type='info', timeout=500)
-    def r2():
-        showMessage("Robot2 coming", type='info', timeout=500)
-    def r3():
-        showMessage("Robot3 coming", type='info', timeout=500)
-    def r4():
-        showMessage("Robot4 coming", type='info', timeout=500)
-    def r5():
-        showMessage("Robot5 coming", type='info', timeout=500)
 
     menu = tk.Menu(app2, tearoff=0)
 
@@ -362,11 +354,11 @@ def gui():
     call_specific_robot.pack(side="top", pady=100)
 
     call_specific_robot.menu = tk.Menu(call_specific_robot, tearoff=0)
-    call_specific_robot.menu.add_cascade(label="ROBOT 1",command=r1,font=("Helvetica", 20))
-    call_specific_robot.menu.add_cascade(label="ROBOT 2",command=r2,font=("Helvetica", 20))
-    call_specific_robot.menu.add_cascade(label="ROBOT 3",command=r3,font=("Helvetica", 20))
-    call_specific_robot.menu.add_cascade(label="ROBOT 4",command=r4,font=("Helvetica", 20))
-    call_specific_robot.menu.add_cascade(label="ROBOT 5",command=r5,font=("Helvetica", 20))
+    call_specific_robot.menu.add_cascade(label="ROBOT 1",command=lambda: scripts.n1(1),font=("Helvetica", 20))
+    call_specific_robot.menu.add_cascade(label="ROBOT 2",command=lambda: scripts.n1(2),font=("Helvetica", 20))
+    call_specific_robot.menu.add_cascade(label="ROBOT 3",command=lambda: scripts.n1(3),font=("Helvetica", 20))
+    call_specific_robot.menu.add_cascade(label="ROBOT 4",command=lambda: scripts.n1(4),font=("Helvetica", 20))
+    call_specific_robot.menu.add_cascade(label="ROBOT 5",command=lambda: scripts.n1(5),font=("Helvetica", 20))
 
             
 
