@@ -23,12 +23,12 @@
         <div class="list">
             {% for item in products %}
                 <div class="item">
-                    <!-- {% if item.outofstock == 'yes' %}
-                        <img src="image/{sold.png}">
-                    {% elif item.outofstock == 'no' %}
+                    {% if item.outofstock == no %}
                         <img src="image/{{item.image}}">
-                    {% endif %} -->
-                    <img src="image/{{item.image}}">
+                    {% endif %}
+                    {% if item.outofstock == "yes" %}
+                        <img src="image/sold.png">
+                    {% endif %}
                     <div class="title">{{item.name}}</div>
                     <div class="price">{{item.price}}</div>
                     <button onclick="addToCard({{loop.index-1}})">Add To Cart</button>

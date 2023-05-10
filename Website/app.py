@@ -85,7 +85,8 @@ def tab():
         values = (numg1, numg2, numg3)
         cursor1.execute(sql, values)
         mydb.commit()
-        
+        print(cursor1.rowcount, "record inserted.")
+        print(values)
         showMessage("Data saved successfully!", timeout=500)
 
 # Create a save button to save the data in the database
@@ -178,21 +179,23 @@ def gui():
         
         # Create a table to display the data
         table = ttk.Treeview(pop_up)
-        table['columns'] = ('name', 'price', 'image')
+        table['columns'] = ('name', 'price', 'image', 'outofstock')
         table.column('#0', width=0, stretch=tk.NO)
-        table.column('name', anchor=tk.CENTER, width=100)
+        table.column('name', anchor=tk.CENTER, width=150)
         table.column('price', anchor=tk.CENTER, width=100)
         table.column('image', anchor=tk.CENTER, width=100)
+        table.column('outofstock', anchor=tk.CENTER, width=100)
         table.heading('name', text='Name')
         table.heading('price', text='Price')
         table.heading('image', text='Image')
+        table.heading('outofstock', text='Out_of_Stock')
         
         # Retrieve data from the database and insert it into the table
         mycursor = mydb.cursor()
         mycursor.execute("SELECT * FROM selected_data")
         results = mycursor.fetchall()
         for row in results:
-            table.insert('', tk.END, text=row[0], values=(row[1], row[2], row[3]))
+            table.insert('', tk.END, text=row[0], values=(row[1], row[2], row[3], row[4]))
         
         # Pack the table into the window
         table.pack(padx=5, pady=5)
@@ -209,19 +212,19 @@ def gui():
         table['columns'] = ('ID', 'Item1', 'Item2', 'Item3', 'Item4', 'Item5', 'Item6')
         table.column('#0', width=0, stretch=tk.NO)
         table.column('ID', anchor=tk.CENTER, width=100)
-        table.column('Item1', anchor=tk.CENTER, width=100)
-        table.column('Item2', anchor=tk.CENTER, width=100)
-        table.column('Item3', anchor=tk.CENTER, width=100)
-        table.column('Item4', anchor=tk.CENTER, width=100)
+        table.column('Item1', anchor=tk.CENTER, width=150)
+        table.column('Item2', anchor=tk.CENTER, width=150)
+        table.column('Item3', anchor=tk.CENTER, width=150)
+        table.column('Item4', anchor=tk.CENTER, width=150)
         table.column('Item5', anchor=tk.CENTER, width=100)
         table.column('Item6', anchor=tk.CENTER, width=100)
         table.heading('ID', text='ID')
-        table.heading('Item1', text='Item1')
-        table.heading('Item2', text='Item2')
-        table.heading('Item3', text='Item3')
-        table.heading('Item4', text='Item4')
-        table.heading('Item5', text='Item5')
-        table.heading('Item6', text='Item6')
+        table.heading('Item1', text='CHICKEN AND EGG')
+        table.heading('Item2', text='CHICKEN TENDER')
+        table.heading('Item3', text='CHICKEN SALAD')
+        table.heading('Item4', text='PUMPKIN SOUP')
+        table.heading('Item5', text='SALAD')
+        table.heading('Item6', text='PIZZA')
         
         # Retrieve data from the database and insert it into the table
         mycursor = mydb.cursor()
@@ -299,6 +302,8 @@ def gui():
             mycursorf1 = mydb.cursor()
             mycursorf1.execute(sql_query, (value1, value2))
             mydb.commit()
+            print(mycursorf1.rowcount, "record(s) affected")
+            print("Outofstock: " + str(value1) + ", New Price: " + str(value2))
         confirm_button = tk.Button(window, text="Confirm", command=lambda:[updatedata(sql_query), window.destroy(), showMessage("Data Edited!", timeout=500)])
         confirm_button.pack()
         
