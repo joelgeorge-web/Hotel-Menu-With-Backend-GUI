@@ -10,6 +10,14 @@ import logging
 from tkinter import ttk
 import scripts
 
+#declaring variables to store the data from the database
+
+data2 = 0
+data3 = 0
+data4 = 0
+data5 = 0
+data6 = 0
+data7 = 0
 
 #Connection to mysql database running on localhost
 
@@ -92,6 +100,10 @@ def tab():
         print(values)
         showMessage("Data saved successfully!", timeout=500)
 
+        bot2_entry.delete(0, tk.END)
+        bot3_entry.delete(0, tk.END)
+        bot4_entry.delete(0, tk.END)
+
 # Create a save button to save the data in the database
 
     bot2 = tk.Button(master=app1, text="SAVE", font=("Helvetica", 18), bg="white", fg="black", command=save_data)
@@ -101,34 +113,17 @@ def tab():
 
 #creating a gui for the kitchen management system
 
+
+
 def gui():
 
     # Create a function to display the table 1 data
 
-    def iddd():
-        sql1 = "select * from selected ORDER BY id DESC LIMIT 1"
-        mycursor1 = mydb.cursor()
-        mycursor1.execute(sql1)
-        a =  mycursor1.fetchone()[0]
-        return a
 
-
+    
     def table1():
-        
-        idd = iddd()
-        sql2 = "SELECT * FROM selected WHERE id = %s"
-        mycursor = mydb.cursor()
-        mycursor.execute(sql2, (idd,))
-        result = mycursor.fetchone()
-        
-        data2 = result[1]
-        data3 = result[2]
-        data4 = result[3]
-        data5 = result[4]
-        data6 = result[5]
-        data7 = result[6]
+        global data2, data3, data4, data5, data6, data7
         messagebox.showinfo("ORDER-1",f"CHICKEN AND EGG: {data2}\n CHICKEN TENDER: {data3}\n CHICKEN SALAD: {data4}\n PUMPKIN SOUP: {data5}\n SALAD: {data6}\n PIZZA: {data7}\n")
-        mycursor.close()
 
     def table2():
         mycursor = mydb.cursor()
@@ -413,9 +408,20 @@ threading.Thread(target=tab).start()
 @app.route('/save', methods=['POST'])
 def save():
     arr = Selected(**request.json)
+    global data2, data3, data4, data5, data6, data7  # use global keyword to access global variables
+    arr = Selected(**request.json)
+    data2 = arr.id1  # store values in global variables
+    data3 = arr.id2
+    data4 = arr.id3
+    data5 = arr.id4
+    data6 = arr.id5
+    data7 = arr.id6
     db.session.add(arr)
     db.session.commit()
     return 'Confirmed successfully!'
+
+
+    
 
 @app.route('/<path:path>')
 def serve_file(path):
