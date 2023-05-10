@@ -128,8 +128,12 @@ document.querySelector('.confirm').addEventListener('click', () => {
       if(!cartItems[`id${i+1}`]){
         cartItems[`id${i+1}`] = 0
       }
+      refresh();
     })
 
+function refresh(key){
+    window.location.reload();
+    }  
     
     // send cart data to server
     fetch('/save', {
@@ -139,11 +143,13 @@ document.querySelector('.confirm').addEventListener('click', () => {
       },
       body: JSON.stringify(cartItems)
     })
+    
     .then(response => response.text())
     .then(data => {
       console.log(data);
       alert(data);
     })
+    
     .catch((error) => {
       console.error('Error:', error);
     });
