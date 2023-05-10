@@ -1,3 +1,4 @@
+#import packages
 from flask import Flask, render_template, request, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 import tkinter as tk
@@ -345,7 +346,7 @@ def gui():
         sql_query = "UPDATE selected_data SET outofstock = %s, price = %s WHERE id = 6"
         food(sql_query, id)
     menu = tk.Menu(app2, tearoff=0)
-
+    #call robot functions and buttons created 
     call_specific_robot = tk.Menubutton(master=right_panel, text="Call Specific Robot", font=("Helvetica", 18), bg="white", fg="black")
     call_specific_robot.pack(side="top", pady=100)
 
@@ -361,6 +362,7 @@ def gui():
     call_any_robot = tk.Button(master=right_panel, text="Call Any Robot", font=("Helvetica", 18),command = scripts.robot_popup,bg="white", fg="black")
     call_any_robot.pack(side="top", pady=100, padx=100)
     
+    #edit button and functions created
 
     edit_button = tk.Menubutton(master=right_panel, text="EDIT MENU", font=("Helvetica", 18), bg="white", fg="black")
     edit_button.pack(side="right", pady=100, padx=100)
@@ -378,7 +380,7 @@ def gui():
 
     app2.mainloop()
 
-
+#fetch data from the db
 
     
 class SelectedData(db.Model):
@@ -387,6 +389,8 @@ class SelectedData(db.Model):
     price = db.Column(db.Integer, default=0)
     image = db.Column(db.String(50), default='5.PNG')
     outofstock = db.Column(db.String(10), default='no')
+
+#push data to db
 
 class Selected(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -398,6 +402,7 @@ class Selected(db.Model):
     id6 = db.Column(db.Integer, default=0)
 
 
+#code to run the flask app  
 
 @app.route('/')
 def index():
@@ -415,6 +420,8 @@ def save():
 @app.route('/<path:path>')
 def serve_file(path):
     return send_from_directory('.', path)
+
+#open the website and gui automatically
 
 def open_browser():
     webbrowser.open_new('http://127.0.0.1:5000/')
