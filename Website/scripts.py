@@ -25,3 +25,15 @@ def n1(id):
     results = mycursor.fetchall()
     for row in results:
         print("Id: " + str(row[0]) + ", Robot Name: " + str(row[1]), "Unique Code: " + str(row[2]))
+
+
+
+
+
+def n2():
+    mycursor = mydb.cursor()
+    sql = "SELECT * FROM guest"
+    mycursor.execute(sql)
+    results = mycursor.fetchall()
+    for row in results:
+        print(", Name: " + str(row[0]), "Phone no: " + str(row[1]), "no of guest: " + str(row[2]))

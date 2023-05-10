@@ -106,7 +106,7 @@ def gui():
 
     def table1():
         mycursor = mydb.cursor()
-        mycursor.execute("SELECT * FROM selected WHERE id = 12")
+        mycursor.execute("SELECT * FROM selected WHERE id = 18")
         result = mycursor.fetchone()
         
         data2 = result[1]
@@ -203,7 +203,6 @@ def gui():
         table.pack(padx=5, pady=5)
 
 
-
     def all_orders():
         # Create a new window
         pop_up = tk.Toplevel()
@@ -267,7 +266,7 @@ def gui():
     table_4_button = tk.Button(master=left_panel, text="TABLE-4", font=("Helvetica", 18),bg="white", fg="black", command=table4)
     table_4_button.pack(side="top", pady=20)
 
-    table_5_button = tk.Button(master=left_panel, text="TABLE-5", font=("Helvetica", 18),bg="white", fg="black", command=table5)
+    table_5_button = tk.Button(master=left_panel, text="Guest List", font=("Helvetica", 18),bg="white", fg="black", command=scripts.n2)
     table_5_button.pack(side="top", pady=20)
 
     all_data = tk.Button(master=left_panel, text="All Data", font=("Helvetica", 18),bg="white", fg="black", command=all_data)
