@@ -398,6 +398,7 @@ class SelectedData(db.Model):
     name = db.Column(db.String(50), default='Sample')
     price = db.Column(db.Integer, default=0)
     image = db.Column(db.String(50), default='5.PNG')
+    outofstock = db.Column(db.String(10), default='no')
 
 class Selected(db.Model):
     id = db.Column(db.Integer, primary_key=True)
