@@ -104,9 +104,20 @@ def gui():
 
     # Create a function to display the table 1 data
 
+    def iddd():
+        sql1 = "select * from selected ORDER BY id DESC LIMIT 1"
+        mycursor1 = mydb.cursor()
+        mycursor1.execute(sql1)
+        a =  mycursor1.fetchone()[0]
+        return a
+
+
     def table1():
+        
+        idd = iddd()
+        sql2 = "SELECT * FROM selected WHERE id = %s"
         mycursor = mydb.cursor()
-        mycursor.execute("SELECT * FROM selected WHERE id = 18")
+        mycursor.execute(sql2, (idd,))
         result = mycursor.fetchone()
         
         data2 = result[1]
@@ -410,4 +421,4 @@ def open_browser():
 
 if __name__ == '__main__':
     threading.Timer(1.25, open_browser).start()
-    app.run()    
+    app.run(host='0.0.0.0',port = 5000)    
