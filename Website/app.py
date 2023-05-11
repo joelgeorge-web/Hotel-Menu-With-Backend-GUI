@@ -85,6 +85,9 @@ def tab():
     bot4_entry.pack(pady=(1,5), padx=20)
     logging.basicConfig(level=logging.DEBUG)
 
+    
+
+
 #save function to save the data in the database when the save button is clicked
 
     def save_data():
@@ -96,10 +99,10 @@ def tab():
         values = (numg1, numg2, numg3)
         cursor1.execute(sql, values)
         mydb.commit()
-        print(cursor1.rowcount, "record inserted.")
-        print(values)
         guest_id = cursor1.lastrowid  # retrieve the auto-incremented ID
-        showMessage("TOKEN: %s" % guest_id, timeout=3000)
+        token_label.config(text="TOKEN: %s" % guest_id)
+        app1.after(3000, lambda: token_label.config(text=""))  # remove the token after 3 seconds
+
 
         bot2_entry.delete(0, tk.END)
         bot3_entry.delete(0, tk.END)
@@ -109,6 +112,11 @@ def tab():
 
     bot2 = tk.Button(master=app1, text="SAVE", font=("Helvetica", 18), bg="white", fg="black", command=save_data)
     bot2.pack(pady=10, padx=20)
+
+    token_label = tk.Label(app1, text="")
+    token_label.pack()
+
+
 #calling the gui
     app1.mainloop()
 
