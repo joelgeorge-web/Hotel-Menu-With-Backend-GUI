@@ -92,13 +92,14 @@ def tab():
         numg2 = int(bot3_entry.get())
         numg3 = int(bot4_entry.get())
         cursor1 = mydb.cursor()
-        sql = "INSERT INTO guest VALUES (%s, %s, %s)"
+        sql = "INSERT INTO guest (name,phone,no_of_guests)VALUES (%s, %s, %s)"
         values = (numg1, numg2, numg3)
         cursor1.execute(sql, values)
         mydb.commit()
         print(cursor1.rowcount, "record inserted.")
         print(values)
-        showMessage("Data saved successfully!", timeout=500)
+        guest_id = cursor1.lastrowid  # retrieve the auto-incremented ID
+        showMessage("TOKEN: %s" % guest_id, timeout=3000)
 
         bot2_entry.delete(0, tk.END)
         bot3_entry.delete(0, tk.END)

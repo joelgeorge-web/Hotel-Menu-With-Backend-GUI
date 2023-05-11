@@ -36,4 +36,4 @@ def n2():
     mycursor.execute(sql)
     results = mycursor.fetchall()
     for row in results:
-        print(" Name: " + str(row[0]), "Phone no: " + str(row[1]), "no of guest: " + str(row[2]))
+        print(" Name: " + str(row[1]), "Phone no: " + str(row[2]), "no of guest: " + str(row[3]))
